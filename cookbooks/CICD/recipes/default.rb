@@ -20,7 +20,7 @@ end
 
 package "jenkins" do
   action :install
-  notifies :restart, service["jenkins"]
+  notifies :restart, 'service[jenkins]', :immediately
 end
 
 service "jenkins" do
