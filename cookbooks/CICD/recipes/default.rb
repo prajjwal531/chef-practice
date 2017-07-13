@@ -26,3 +26,13 @@ end
 service "jenkins" do
   action :nothing
 end
+
+template "#{node["CICD"]["jenkins"]["home"]}/config.xml" do
+  source 'config.xml.erb'
+  notifies :restart, 'service[jenkins]', :delayed
+end
+
+template "#{node["CICD"]["jenkins"]["home"]}/hudson.tasks.Maven.xml" do
+  source 'hudson.tasks.maven.xml.erb'
+  notifies :restart, 'service[jenkins]', :delayed
+end
